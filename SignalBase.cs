@@ -23,7 +23,7 @@ namespace Atlas.Signals
 
 		public bool IsDispatching => Dispatching > 0;
 
-		public IReadOnlyList<ISlotBase> Slots => slots;
+		public IReadOnlyList<ISlotBase> Slots => new List<SlotBase>(slots);
 
 		private void DisposeSlot(SlotBase slot)
 		{
