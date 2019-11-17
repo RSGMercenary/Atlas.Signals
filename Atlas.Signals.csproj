@@ -2,6 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>RSG Mercenary</Authors>
+    <Product>Atlas Signals</Product>
+    <Description>Signals &amp; Slots Library</Description>
+    <PackageProjectUrl>https://github.com/RSGMercenary/Atlas.Signals</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RSGMercenary/Atlas.Signals</RepositoryUrl>
+    <PackageTags>signals slots events messages</PackageTags>
+    <Copyright>Copyright 2019 RSG Mercenary</Copyright>
+    <Company>RSG Mercenary</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIconUrl>Icon.ico</PackageIconUrl>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
