@@ -1,4 +1,6 @@
 # Atlas Signals
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e8f0693196e94ba0beff10975d242db2)](https://www.codacy.com/manual/RSGMercenary/Atlas.Signals?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RSGMercenary/Atlas.Signals&amp;utm_campaign=Badge_Grade)
+![Codacy Badge](https://img.shields.io/codacy/grade/e8f0693196e94ba0beff10975d242db2?color=0077CC&label=Codacy%20Quality&style=plastic)
+![NuGet Version](https://img.shields.io/nuget/v/Atlas.Signals?color=0077CC&label=NuGet%20Version&style=plastic)
+![NuGet Downloads](https://img.shields.io/nuget/dt/Atlas.Signals?color=0077CC&label=NuGet%20Downloads&style=plastic)
 
 Standalone Signals &amp; Slots Library
