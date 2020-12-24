@@ -5,9 +5,9 @@ namespace Atlas.Signals
 {
 	public abstract class SignalBase : ISignalBase, IDisposable
 	{
-		private readonly List<SlotBase> slots = new List<SlotBase>();
-		private readonly Stack<SlotBase> slotsPooled = new Stack<SlotBase>();
-		private readonly Stack<SlotBase> slotsRemoved = new Stack<SlotBase>();
+		private readonly List<SlotBase> slots = new();
+		private readonly Stack<SlotBase> slotsPooled = new();
+		private readonly Stack<SlotBase> slotsRemoved = new();
 
 		public int Dispatching { get; private set; } = 0;
 		public bool IsDisposed { get; private set; } = false;
