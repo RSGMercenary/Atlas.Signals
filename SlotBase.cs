@@ -1,55 +1,54 @@
 ﻿using System;
 
-namespace Atlas.Signals
+namespace Atlas.Signals;
+
+public class SlotBase : ISlotBase
 {
-	public class SlotBase : ISlotBase
+	private int priority = 0;
+	public ISignalBase Signal { get; internal set; }
+	public Delegate Listener { get; internal set; }
+	public bool IsRemoved { get; internal set; } = false;
+
+	public void Dispose()
 	{
-		private int priority = 0;
-		public ISignalBase Signal { get; internal set; }
-		public Delegate Listener { get; internal set; }
-		public bool IsRemoved { get; internal set; } = false;
-
-		public void Dispose()
+		if (Signal != null)
 		{
-			if(Signal != null)
-			{
-				Signal.Remove(Listener);
-			}
-			else
-			{
-				Signal = null;
-				Listener = null;
-				priority = 0;
-			}
+			Signal.Remove(Listener);
 		}
-
-		public int Priority
+		else
 		{
-			get => priority;
-			set
-			{
-				if(priority == value)
-					return;
-				priority = value;
-				(Signal as SignalBase)?.Prioritize(this);
-			}
+			Signal = null;
+			Listener = null;
+			priority = 0;
 		}
 	}
 
-	public class SlotBase<TSignal, TDelegate> : SlotBase
-		where TSignal : ISignalBase
-		where TDelegate : Delegate
+	public int Priority
 	{
-		public new TSignal Signal
+		get => priority;
+		set
 		{
-			get => (TSignal)base.Signal;
-			set => base.Signal = value;
+			if (priority == value)
+				return;
+			priority = value;
+			(Signal as SignalBase)?.Prioritize(this);
 		}
+	}
+}
 
-		public new TDelegate Listener
-		{
-			get => (TDelegate)base.Listener;
-			set => base.Listener = value;
-		}
+public class SlotBase<TSignal, TDelegate> : SlotBase
+	where TSignal : ISignalBase
+	where TDelegate : Delegate
+{
+	public new TSignal Signal
+	{
+		get => (TSignal)base.Signal;
+		set => base.Signal = value;
+	}
+
+	public new TDelegate Listener
+	{
+		get => (TDelegate)base.Listener;
+		set => base.Listener = value;
 	}
 }
