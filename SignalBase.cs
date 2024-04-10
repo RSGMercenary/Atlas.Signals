@@ -14,7 +14,7 @@ public abstract class SignalBase : ISignalBase, IDisposable
 
 	public void Dispose()
 	{
-		if (IsDisposed)
+		if(IsDisposed)
 			return;
 		IsDisposed = true;
 		slotsPooled.Clear();
@@ -29,17 +29,17 @@ public abstract class SignalBase : ISignalBase, IDisposable
 	{
 		slot.Signal = null;
 		slot.Dispose();
-		if (!IsDisposed)
+		if(!IsDisposed)
 			slotsPooled.Push(slot);
 	}
 
 	public ISlotBase Get(Delegate listener)
 	{
-		if (listener == null)
+		if(listener == null)
 			return null;
-		foreach (var slot in slots)
+		foreach(var slot in slots)
 		{
-			if (slot.Listener == listener)
+			if(slot.Listener == listener)
 				return slot;
 		}
 		return null;
@@ -47,20 +47,20 @@ public abstract class SignalBase : ISignalBase, IDisposable
 
 	public ISlotBase Get(int index)
 	{
-		if (index < 0)
+		if(index < 0)
 			return null;
-		if (index > slots.Count - 1)
+		if(index > slots.Count - 1)
 			return null;
 		return slots[index];
 	}
 
 	public int GetIndex(Delegate listener)
 	{
-		if (listener == null)
+		if(listener == null)
 			return -1;
-		for (int index = slots.Count - 1; index > -1; --index)
+		for(int index = slots.Count - 1; index > -1; --index)
 		{
-			if (slots[index].Listener == listener)
+			if(slots[index].Listener == listener)
 				return index;
 		}
 		return -1;
@@ -70,12 +70,12 @@ public abstract class SignalBase : ISignalBase, IDisposable
 
 	public ISlotBase Add(Delegate listener, int priority)
 	{
-		if (listener == null)
+		if(listener == null)
 			return null;
 		var slot = (SlotBase)Get(listener);
-		if (slot == null)
+		if(slot == null)
 		{
-			if (slotsPooled.Count > 0)
+			if(slotsPooled.Count > 0)
 				slot = slotsPooled.Pop();
 			else
 				slot = CreateSlot();
@@ -98,9 +98,9 @@ public abstract class SignalBase : ISignalBase, IDisposable
 	internal void Prioritize(SlotBase slot)
 	{
 		slots.Remove(slot);
-		for (var index = slots.Count; index > 0; --index)
+		for(var index = slots.Count; index > 0; --index)
 		{
-			if (slots[index - 1].Priority <= slot.Priority)
+			if(slots[index - 1].Priority <= slot.Priority)
 			{
 				slots.Insert(index, slot);
 				return;
@@ -111,11 +111,11 @@ public abstract class SignalBase : ISignalBase, IDisposable
 
 	public bool Remove(Delegate listener)
 	{
-		if (listener != null)
+		if(listener != null)
 		{
-			for (int index = slots.Count - 1; index > -1; --index)
+			for(int index = slots.Count - 1; index > -1; --index)
 			{
-				if (slots[index].Listener == listener)
+				if(slots[index].Listener == listener)
 				{
 					return Remove(index);
 				}
@@ -126,14 +126,14 @@ public abstract class SignalBase : ISignalBase, IDisposable
 
 	public bool Remove(int index)
 	{
-		if (index < 0)
+		if(index < 0)
 			return false;
-		if (index >= slots.Count)
+		if(index >= slots.Count)
 			return false;
 		var slot = slots[index];
 		slot.IsRemoved = true;
 		slots.RemoveAt(index);
-		if (Dispatching > 0)
+		if(Dispatching > 0)
 		{
 			slotsRemoved.Push(slot);
 		}
@@ -146,9 +146,9 @@ public abstract class SignalBase : ISignalBase, IDisposable
 
 	public bool RemoveAll()
 	{
-		if (slots.Count <= 0)
+		if(slots.Count <= 0)
 			return false;
-		while (slots.Count > 0)
+		while(slots.Count > 0)
 			Remove(slots.Count - 1);
 		return true;
 	}
@@ -156,18 +156,18 @@ public abstract class SignalBase : ISignalBase, IDisposable
 	protected bool Dispatch<TSlot>(Action<TSlot> dispatcher)
 		where TSlot : SlotBase
 	{
-		if (slots.Count <= 0)
+		if(slots.Count <= 0)
 			return false;
 		++Dispatching;
-		foreach (TSlot slot in Slots)
+		foreach(TSlot slot in Slots)
 		{
-			if (slot.IsRemoved)
+			if(slot.IsRemoved)
 				continue;
 			dispatcher.Invoke(slot);
 		}
-		if (--Dispatching == 0)
+		if(--Dispatching == 0)
 		{
-			while (slotsRemoved.Count > 0)
+			while(slotsRemoved.Count > 0)
 				DisposeSlot(slotsRemoved.Pop());
 		}
 		return true;

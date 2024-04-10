@@ -11,7 +11,7 @@ public class SlotBase : ISlotBase
 
 	public void Dispose()
 	{
-		if (Signal != null)
+		if(Signal != null)
 		{
 			Signal.Remove(Listener);
 		}
@@ -28,7 +28,7 @@ public class SlotBase : ISlotBase
 		get => priority;
 		set
 		{
-			if (priority == value)
+			if(priority == value)
 				return;
 			priority = value;
 			(Signal as SignalBase)?.Prioritize(this);
