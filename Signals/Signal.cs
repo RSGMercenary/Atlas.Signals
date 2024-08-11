@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Atlas.Signals.Slots;
+using System;
 
-namespace Atlas.Signals;
+namespace Atlas.Signals.Signals;
 
 public class Signal : SignalBase<Slot, ISlot, Action>, ISignal, IDispatch
 {

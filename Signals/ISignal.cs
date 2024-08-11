@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Atlas.Signals.Slots;
+using System;
 using System.Collections.Generic;
 
-namespace Atlas.Signals;
+namespace Atlas.Signals.Signals;
 
 public interface ISignalBase
 {

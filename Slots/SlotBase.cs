@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Atlas.Signals.Signals;
+using Atlas.Signals.Slots;
+using System;
 
 namespace Atlas.Signals;
 

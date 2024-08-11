@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Atlas.Signals.Signals;
+using System;
 
-namespace Atlas.Signals;
+namespace Atlas.Signals.Slots;
 
 public interface ISlotBase : IDisposable
 {
