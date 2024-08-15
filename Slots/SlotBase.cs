@@ -1,8 +1,7 @@
 ﻿using Atlas.Signals.Signals;
-using Atlas.Signals.Slots;
 using System;
 
-namespace Atlas.Signals;
+namespace Atlas.Signals.Slots;
 
 public class SlotBase : ISlotBase
 {
